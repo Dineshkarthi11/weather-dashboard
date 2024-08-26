@@ -39,6 +39,18 @@ export const CityList: React.FC<{ onSelectCity: (city: string) => void }> = ({ o
                                 <p>Wind Speed: {weatherData[city].current.wind.speed} m/s</p>
                                 <p>Sunrise: {new Date(weatherData[city].current.sys.sunrise * 1000).toLocaleTimeString()}</p>
                                 <p>Sunset: {new Date(weatherData[city].current.sys.sunset * 1000).toLocaleTimeString()}</p>
+                                
+                                {/* 5-Day Forecast */}
+                                <h4>5-Day Forecast:</h4>
+                                <ul>
+                                    {weatherData[city].forecast.map((day: any, index: number) => (
+                                        <li key={index}>
+                                            <p>Date: {new Date(day.dt * 1000).toLocaleDateString()}</p>
+                                            <p>Temperature: {day.main.temp}°C</p>
+                                            <p>Condition: {day.weather[0].description}</p>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         ) : (
                             <p>Loading...</p>
